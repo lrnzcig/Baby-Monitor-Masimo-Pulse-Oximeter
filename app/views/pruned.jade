@@ -12,8 +12,15 @@ block content
         small you can click on the legend names (O2, BPM, PI) at the bottom of the graph to turn on and off different results
   .row
   .col-md-12
+   a.btn.btn-primary(onclick='prev_week()') Prev. Week
    a.btn.btn-primary(onclick='prev_day()') Prev. Day
    a.btn.btn-primary(onclick='next_day()') Next Day
+   a.btn.btn-primary(onclick='next_week()') Next Week
+   hr
+   .row
+   .col-md-12
+   a.btn.btn-primary(onclick='day_1()') 31/1/2017
+   a.btn.btn-primary(onclick='day_2()') 4/2/2017
 
 block scripts
     script(src='https://code.highcharts.com/stock/highstock.js')

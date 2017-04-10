@@ -173,7 +173,7 @@ $(document).ready(function () {
 
 function get_last_avail_day() {
   // TODO call server to get the last avalaible day in the ddbb
-  dt_start = new Date(Date.UTC(2017, 2 - 1, 18,19, 0, 0, 0));  //20170218 19:00:00
+  dt_start = new Date(Date.UTC(2017, 4 - 1, 4,19, 0, 0, 0));  //20170218 19:00:00
   ms_start=dt_start.getTime();
   ms_end=ms_start+ 17*60*60*1000 ;
   return {
@@ -193,7 +193,28 @@ function next_day(){
   ms.end=ms.end+24*60*60*1000;
   load_day();
   };
-
+function prev_week(){
+  ms.start=ms.start-24*60*60*1000*7;
+  ms.end=ms.end-24*60*60*1000*7;
+  load_day();
+  };
+function next_week(){
+  ms.start=ms.start+24*60*60*1000*7;
+  ms.end=ms.end+24*60*60*1000*7;
+  load_day();
+  };
+function day_1(){
+  dt_start = new Date(Date.UTC(2017, 1- 1, 31,19, 0, 0, 0));
+  ms.start=dt_start.getTime();
+  ms.end=ms.start+ 17*60*60*1000 ;
+  load_day();
+  };
+function day_2(){
+  dt_start = new Date(Date.UTC(2017, 2 - 1, 4,19, 0, 0, 0));
+  ms.start=dt_start.getTime();
+  ms.end=ms.start+ 17*60*60*1000 ;
+  load_day();
+  };
 function load_day() {
   var chart = $('#MAINGRAPHPRUNED').highcharts();
     chart.showLoading('Loading data from server...');
