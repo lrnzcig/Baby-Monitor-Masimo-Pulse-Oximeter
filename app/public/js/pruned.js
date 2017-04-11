@@ -1,9 +1,5 @@
 $(document).ready(function () {
 
-
-    $.getJSON('/SPO2data?start=' + Math.round(ms.start) +
-        '&end=' + Math.round(ms.end), function (data) {
-
         $('#MAINGRAPHPRUNED').highcharts('StockChart', {
 
             chart: {
@@ -110,7 +106,7 @@ $(document).ready(function () {
                 {
                     type: 'columnrange',
                     name: 'O2%',
-                    data: data.spo2,
+          //          data: data.spo2,
                     turboThreshold: 0,
                     pointPlacement: "between"
                 },
@@ -118,7 +114,7 @@ $(document).ready(function () {
                     type: 'spline',
                     name: 'O2%',
                     id: 'spo2',
-                    data: data.spo2,
+          ///          data: data.spo2,
                     turboThreshold: 0,
                     pointPlacement: "between"
                 },
@@ -127,7 +123,7 @@ $(document).ready(function () {
                     name: 'Alarm',
                     color: "rgba(178,34,34,0.5)",
                     fillColor: 'rgba(178,34,34,0.5)',
-                    data: data.alarms,
+          ///          data: data.alarms,
                     onSeries: 'spo2',
                     turboThreshold: 0,
                     showInLegend: true
@@ -144,7 +140,7 @@ $(document).ready(function () {
                     type: 'spline',
                     name: 'BPM',
                     id: 'bpm',
-                    data: data.bpm,
+            ///        data: data.bpm,
                     turboThreshold: 0,
                     pointPlacement: "between",
                     visible: false
@@ -155,7 +151,7 @@ $(document).ready(function () {
                     yAxis: 1,
                     name: 'PI',
                     id: 'pi',
-                    data: data.pi,
+              ///      data: data.pi,
                     turboThreshold: 0,
                     pointPlacement: "between",
                     visible: false,
@@ -164,24 +160,35 @@ $(document).ready(function () {
                 }
               ]
         });
+      load_last_avail_day()
 
-
-    });
 
 
 });
 
-function get_last_avail_day() {
-  // TODO call server to get the last avalaible day in the ddbb
-  dt_start = new Date(Date.UTC(2017, 4 - 1, 4,19, 0, 0, 0));  //20170218 19:00:00
-  ms_start=dt_start.getTime();
-  ms_end=ms_start+ 17*60*60*1000 ;
-  return {
-      start: ms_start,
-      end: ms_end
-  }
+var ms = new Object();     /// day on display
+
+function load_last_avail_day() {
+  // call server to get the last avalaible day in the ddbb
+
+  $.getJSON('/data', function (data) {
+          var row = data[0];
+          lastDate= new Date(row.date);
+
+          lastDate.setTime(lastDate- 17*60*60*1000);
+          lastDate.setHours(19);
+          lastDate.setMinutes(0);
+          lastDate.setSeconds(0);
+          lastDate.setMilliseconds(0);
+
+          ms_start=lastDate.getTime();
+          ms_end=ms_start+ 17*60*60*1000 ;
+          ms.start=ms_start;
+          ms.end=ms_end;
+          load_day();
+      });
 };
-var ms = get_last_avail_day();
+
 
 function prev_day(){
   ms.start=ms.start-24*60*60*1000;
