@@ -52,6 +52,10 @@ exports.updateRights = function(req, res){
         user.pruned = true;
     else if (req.params.role == "pruned" && req.params.state == "false")
         user.pruned = false;
+    if (req.params.role == "temperature" && req.params.state == "true")
+        user.temperature = true;
+    else if (req.params.role == "temperature" && req.params.state == "false")
+        user.temperature = false;
 
     user.save(function(err) {
 

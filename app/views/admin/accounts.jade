@@ -15,6 +15,7 @@ block content
                 th Live
                 th Tags
                 th Pruned
+                th Temperature
         tbody
             each val in users
                 tr
@@ -30,9 +31,11 @@ block content
                     td
                         input(type='checkbox',name='live', checked=val.live onchange='updateRights("#{val.id}", "live",  this.checked);' )
                     td
-                        input(type='checkbox',name='tags', checked=val.live onchange='updateRights("#{val.id}", "tags",  this.checked);' )
+                        input(type='checkbox',name='tags', checked=val.tags onchange='updateRights("#{val.id}", "tags",  this.checked);' )
                     td
-                        input(type='checkbox',name='pruned', checked=val.live onchange='updateRights("#{val.id}", "pruned",  this.checked);' )
+                        input(type='checkbox',name='pruned', checked=val.pruned onchange='updateRights("#{val.id}", "pruned",  this.checked);' )
+                    td
+                        input(type='checkbox',name='temperature', checked=val.temperature onchange='updateRights("#{val.id}", "temperature",  this.checked);' )
 
 
 block scripts

@@ -18,6 +18,7 @@ var userSchema = new mongoose.Schema({
   live: Boolean,
   tags: Boolean,
   pruned: Boolean,
+  temperature: Boolean,
   profile: {
     name: { type: String, default: '' },
     gender: { type: String, default: '' },

@@ -166,7 +166,7 @@ $(document).ready(function () {
             } ())
         }]
     });
-    
+
     $('#MAINGRAPH').highcharts({
         chart: {
             zoomType: 'xy',
@@ -184,11 +184,11 @@ $(document).ready(function () {
         yAxis: [{ // Heart Rate
             labels: {
                 format: '{value}',
-                
+
             },
             title: {
                 text: 'Heart Rate',
-                
+
             },
             opposite: true
 
@@ -196,11 +196,11 @@ $(document).ready(function () {
             gridLineWidth: 0,
             title: {
                 text: 'SPO2',
-                
+
             },
             labels: {
                 format: '{value} %',
-                
+
             }
 
         }],
@@ -262,7 +262,7 @@ $(document).ready(function () {
 
         }]
     });
-   
+
 
 
     var lastDate
@@ -277,11 +277,11 @@ $(document).ready(function () {
                 var charto2 = $('#SP02GRAPH').highcharts()
                 var mainChart = $('#MAINGRAPH').highcharts()
                 var bpmgauge = $('#BPMGAUGE').highcharts()
-                
+
                 var jsdate = (new Date()).getTime()
                 if (lastDate != row.date) {
                     lastDate = row.date;
-                    
+
                     if (row.bpm != -1){
                         $('#BPM').html(row.bpm)
                         chart.series[0].addPoint([jsdate, row.bpm], true, true);
@@ -290,7 +290,7 @@ $(document).ready(function () {
                     else{
                         $('#BPM').html("---")
                     }
-                        
+
                     if (row.spo2 != -1){
                         $('#SP02').html(row.spo2 + "%")
                         charto2.series[0].addPoint([jsdate, row.spo2], true, true)
@@ -298,16 +298,16 @@ $(document).ready(function () {
                     }
                     else{
                         $('#SP02').html("--%")
-                        
+
                     }
                     if (row.pi != -1){
                         $('#PI').html(row.pi + "%")
-                      
-                    
+
+
                     }else{
                         $('#PI').html("--%")
                     }
-                    
+
                     if (row.alarm == "0000"){
                         $('#message').html("Normal")
                         $('#messagediv').removeClass('alert-danger alert-success alert-warning alert-info').addClass('alert-success')
@@ -321,7 +321,7 @@ $(document).ready(function () {
                          $('#message').html(row.alarm)
                         $('#messagediv').removeClass('alert-danger alert-success alert-warning alert-info').addClass('alert-info')
                     }
-                    
+
                 } else {
                     $('#BPM').html("--")
                     $('#SP02').html("--%")
@@ -334,6 +334,36 @@ $(document).ready(function () {
 
             });
     }, 1000);
+
+    // access the temperature sensor with an interval
+    // but only if the user has set "temperature" permissions
+    var temperature = $('#TEMP')
+    if (temperature.length) {
+      var lastDateTemperature
+      var get_temperature = function () {
+          $.ajax({
+              url: "/temperature",
+          })
+              .done(function (data) {
+                  var row = data[0];
+
+                  if (lastDateTemperature != row.date & ! row.error) {
+                      lastDateTemperature = row.date;
+
+                      $('#TEMP').html(row.temperature)
+                      $('#HUM').html(row.humidity)
+
+
+                  } else {
+                      $('#TEMP').html("--")
+                      $('#HUM').html("--")
+                  }
+
+              });
+      };
+      get_temperature();
+      setInterval(get_temperature, 60000);  // get temperature from sensors every minute
+    }
 
 
 });

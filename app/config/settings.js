@@ -11,7 +11,8 @@ module.exports = {
     history: true,
     live: true,
     tags: true,
-    pruned: true
+    pruned: true,
+    temperature: true
   }
 
 };

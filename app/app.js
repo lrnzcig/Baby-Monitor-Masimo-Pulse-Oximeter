@@ -29,6 +29,7 @@ var userController = require('./controllers/user');
 var adminController = require('./controllers/admin');
 var tagController = require('./controllers/tag');
 var prunedController = require('./controllers/pruned');
+var temperatureController = require('./controllers/temperature');
 
 /**
  * API keys and Passport configuration.
@@ -119,6 +120,7 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
 app.get('/', homeController.index);
 app.get('/data', homeController.data);
 app.get('/sampledata', homeController.sampleData);
+app.get('/temperature', temperatureController.temperature);
 app.get('/historicalSPO2Data', passportConf.isAuthenticated, homeController.historicalSPO2Data);
 app.get('/SPO2Count', passportConf.isAuthenticated, homeController.SPO2Count);
 app.get('/status', passportConf.isAuthenticated, homeController.status);

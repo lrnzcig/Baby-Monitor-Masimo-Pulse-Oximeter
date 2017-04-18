@@ -4,23 +4,49 @@ block content
   p.lead Vital Stats for #{theme.babyname}
   hr
   .row
-    .col-sm-12.col-md-6.col-lg-3
-      .well.infobox
-        h1 BPM
-        #BPM 150
+    if !user.temperature
+        .col-sm-12.col-md-6.col-lg-3
+          .well.infobox
+            h1 BPM
+            #BPM 150
+        .col-sm-12.col-md-6.col-lg-3
+          .well.infobox
+            h1 O2 Level
+            #SP02 99%
+        .col-sm-12.col-md-6.col-lg-3
+          .well.infobox
+            h1 PI
+            #PI .1%
+        .col-sm-12.col-md-6.col-lg-3
+          #messagediv.alert.alert-warning.infobox
+            h1#message No Connection
+    if user.temperature
+      .row
+        .col-sm-12.col-md-6.col-lg-2
+          .well.infobox
+            h1 BPM
+            #BPM 150
+        .col-sm-12.col-md-6.col-lg-2
+          .well.infobox
+            h1 O2
+            #SP02 99%
+        .col-sm-12.col-md-6.col-lg-2
+          .well.infobox
+            h1 PI
+            #PI .1%
+        .col-sm-12.col-md-6.col-lg-2
+          #messagediv.alert.alert-warning.infobox
+            h1#message No Connection
+        .col-sm-12.col-md-6.col-lg-2
+          .well.infobox
+            h1 TEMP
+            #TEMP --
+        .col-sm-12.col-md-6.col-lg-2
+          .well.infobox
+            h1 HUM
+            #HUM --
 
 
-    .col-sm-12.col-md-6.col-lg-3
-      .well.infobox
-        h1 O2 Level
-        #SP02 99%
-    .col-sm-12.col-md-6.col-lg-3
-      .well.infobox
-        h1 PI
-        #PI .1%
-    .col-sm-12.col-md-6.col-lg-3
-      #messagediv.alert.alert-warning.infobox
-        h1#message No Connection
 
   p.lead Graphs
   hr

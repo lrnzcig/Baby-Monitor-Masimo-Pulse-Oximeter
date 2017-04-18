@@ -11697,7 +11697,7 @@ body {
   margin-bottom: 75px;
 }
 
-#BPM, #SP02, #PI {
+#BPM, #SP02, #PI, #TEMP, #HUM {
   font-size: 5em;
 }
 
