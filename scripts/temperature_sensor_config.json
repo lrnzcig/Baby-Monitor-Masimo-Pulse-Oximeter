@@ -1,0 +1,13 @@
+{
+"sensors":[{
+    "sensor1":"sensor1",
+    "sensor2":"sensor2"
+    }],
+"sensorgpios":[{
+    "gpiosensor1":"22",
+    "gpiosensor2":"23"
+    }],
+"sensortype":"22",
+"sensoramount":"2",
+"adafruitpath":"/home/pi/pulsi/Adafruit_Python_DHT/examples/AdafruitDHT.py"
+}
