@@ -114,8 +114,8 @@ exports.addDevice = function (req, res) {
     })
 };
 /**
- * GET /data
- * Get the last record inserted into the Mongo db and returns it to the user.
+ * GET /sampleData
+ * Gets a random record of the last 100 inserted into MongoDB and returns it to the user.
  */
 exports.sampleData = function (req, res) {
     var skip = random(1, 100)
