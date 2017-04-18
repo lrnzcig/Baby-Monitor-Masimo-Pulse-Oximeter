@@ -7,6 +7,7 @@ import serial
 #devices
 import Devices.RAD8
 import Devices.RAD7
+import Devices.Ohmeda
 
 def read_and_parse_monitor_data():
     "Read from Serial port and parse depending on what device is selected"
@@ -44,6 +45,8 @@ def read_and_parse_monitor_data():
                 event = Devices.RAD8.create_event_from_output(device_output)
             elif device_type == "RAD7":
                 event = Devices.RAD7.create_event_from_output(device_output)
+            elif device_type == "Ohmeda":
+                event = Devices.Ohmeda.create_event_from_output(device_output)
 
             if event != None:
                 event_database.radevents.insert(event)
