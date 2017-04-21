@@ -72,12 +72,14 @@ def read_sensors():
 
     sensor1error = False
     sensor1exception = None
+    sensor1temperature = None
+    sensor1humidity = None
     # Sensor 1 readings
     try:
         sensor1temperature, sensor1humidity = sensorReadings(gpioForSensor1, sensorType)
     except Exception as e:
         sensor1error = True
-        logger.error("sensor 1 error!", e)
+        logger.error(e)
         sensor1exception = e
         pass
 
@@ -104,7 +106,10 @@ def temperature_sensor_loop(sc):
     sc.enter(60, 1, temperature_sensor_loop, (sc,))
     # current read into ddbb
     output = read_sensors()
-    event_database.temperatureevents.insert_one(output)
+    try:
+        event_database.temperatureevents.insert_one(output)
+    except Exception as e:
+        logger.error(e)
     logger.info(output)
 
 s.enter(60, 1, temperature_sensor_loop, (s,))
